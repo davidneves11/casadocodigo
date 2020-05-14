@@ -6,17 +6,9 @@
         <h1> Listagem de livros </h1>
 
         <table>
-            <tr>
-                <td>ID</td>
-                <td>Título</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Fundamentos do Node</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Node Avançado</td>
+            <tr for (livro in data.livros)>
+                <td>${livro.id}</td>
+                <td>${livro.titulo}</td>
             </tr>
         </table> 
     </body> 
