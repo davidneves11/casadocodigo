@@ -1,4 +1,6 @@
 const db = require('../../config/database')
+const LivroDao = require('../infra/livroDao');
+
 
 module.exports = function(app) {
 
@@ -9,8 +11,8 @@ module.exports = function(app) {
                     <head>
                         <meta charset="utf-8">
                     </head>
-                    <body>
-                        <h1> Casa do Código </h1>
+                    <body>                  
+                      <h1> Casa do Código </h1>
                     </body> 
                 </html>
             `
@@ -18,17 +20,28 @@ module.exports = function(app) {
     });
 
     app.get('/livros', function(req, resp) {
-        db.all('SELECT * FROM livros', function(erro, resultados) {
 
-            resp.marko(
+        const livroDao = new LivroDao(db);
+
+        // livroDao.lista(function(erro, resultados) {
+
+        //     resp.marko(
+        //         require('../views/livros/lista/lista.marko'), {
+        //             livros: resultados
+        //         }
+
+        //     );
+
+        // });
+
+        //utilizando Promises e arrow function
+        livroDao.lista()
+            .then(livros => resp.marko(
                 require('../views/livros/lista/lista.marko'), {
-                    livros: resultados
+                    livros
                 }
-
-            );
-
-        });
-
+            ))
+            .catch(erro => console.log(erro));
 
     });
 }
