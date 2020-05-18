@@ -8,7 +8,7 @@ class LivroDao {
         return new Promise((resolve, reject) => {
             this._db.all(
                 'SELECT * FROM livros',
-                (erro, resultados) => {
+                function(erro, resultados) {
                     if (erro) return reject('Não foi possível listar os livros!');
 
                     return resolve(resultados);
@@ -31,15 +31,34 @@ class LivroDao {
                     livro.preco,
                     livro.descricao
                 ],
-                function(err) {
-                    if (err) {
-                        console.log(err);
+                function(erro) {
+                    if (erro) {
+                        console.log(erro);
                         return reject('Não foi possível adicionar o livro!');
                     }
 
                     resolve();
                 }
             )
+        });
+    }
+
+    remove(id) {
+
+        return new Promise((resolve, reject) => {
+            this._db.get(
+                `
+                    DELETE 
+                    FROM livros
+                    WHERE id = ?
+                `, [id],
+                function(erro) {
+                    if (erro) {
+                        return reject('Não foi possível remover o livro!');
+                    }
+                    return resolve();
+                }
+            );
         });
     }
 }

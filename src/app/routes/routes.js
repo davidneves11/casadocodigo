@@ -1,5 +1,5 @@
 const db = require('../../config/database')
-const LivroDao = require('../infra/livroDao');
+const LivroDao = require('../infra/LivroDao');
 
 
 module.exports = function(app) {
@@ -54,6 +54,15 @@ module.exports = function(app) {
         const livroDao = new LivroDao(db);
         livroDao.adiciona(req.body)
             .then(resp.redirect('/livros'))
+            .catch(erro => console.log(erro));
+    });
+
+    app.delete('/livros/:id', function(req, resp) {
+        const id = req.params.id;
+
+        const livroDao = new LivroDao(db);
+        livroDao.remove(id)
+            .then(() => resp.status(200).end())
             .catch(erro => console.log(erro));
     });
 }
