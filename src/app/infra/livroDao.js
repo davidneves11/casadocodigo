@@ -4,7 +4,7 @@ class LivroDao {
         this._db = db;
     }
 
-    lista(callback) {
+    lista() {
         return new Promise((resolve, reject) => {
             this._db.all(
                 'SELECT * FROM livros',
