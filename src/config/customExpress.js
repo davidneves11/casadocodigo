@@ -1,27 +1,32 @@
-require('marko/node-require').install();
-require('marko/express');
+require('marko/node-require.js').install();
+require('marko/express.js');
 
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-
-app.use('/estatico', express.static('src/app/public'));
-
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.use(methodOverride(function(req, res) {
-    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-        var method = req.body._method;
-        delete req.body._method;
-        return method;
-    }
-}));
-
 const routes = require('../app/routes/routes.js');
-routes(app)
 
+module.exports = () => {
 
-module.exports = app;
+    const app = express();
+
+    app.use('/estatico', express.static('src/app/public'));
+
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+
+    app.use(methodOverride((req, res) => {
+        console.log('oi');
+        if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+            console.log('tchau');
+            var method = req.body._method;
+            delete req.body._method;
+            return method;
+        }
+    }));
+
+    routes(app)
+
+    return app;
+}

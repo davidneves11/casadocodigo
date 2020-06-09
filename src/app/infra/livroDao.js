@@ -1,26 +1,27 @@
-class LivroDao {
+module.exports = class LivroDao {
 
-    constructor(db) {
-        this._db = db;
+    constructor(connection) {
+        this._connection = connection;
     }
 
     lista() {
         return new Promise((resolve, reject) => {
-            this._db.all(
-                'SELECT * FROM livros',
-                function(erro, resultados) {
-                    if (erro) return reject('Não foi possível listar os livros!');
-
-                    return resolve(resultados);
+            this._connection.query('SELECT * FROM livros', function(erro, resultado) {
+                if (erro) {
+                    return reject({
+                        mensagem: 'Não foi possível listar os livros!',
+                        erro
+                    });
+                } else {
+                    return resolve(resultado);
                 }
-            )
-
-        });
+            });
+        })
     }
 
     adiciona(livro) {
         return new Promise((resolve, reject) => {
-            this._db.run(`
+            this._connection.query(`
                 INSERT INTO LIVROS (
                         titulo,
                         preco,
@@ -31,28 +32,29 @@ class LivroDao {
                     livro.preco,
                     livro.descricao
                 ],
-                function(erro) {
+                (erro, resultado) => {
                     if (erro) {
-                        console.log(erro);
-                        return reject('Não foi possível adicionar o livro!');
+                        return reject({
+                            mensagem: 'Não foi possível adicionar o livro',
+                            erro,
+                        });
+                    } else {
+                        resolve(resultado);
                     }
-
-                    resolve();
-                }
-            )
+                });
         });
     }
 
     remove(id) {
 
         return new Promise((resolve, reject) => {
-            this._db.get(
+            this._connection.query(
                 `
                     DELETE 
                     FROM livros
                     WHERE id = ?
                 `, [id],
-                function(erro) {
+                (erro) => {
                     if (erro) {
                         return reject('Não foi possível remover o livro!');
                     }
@@ -65,7 +67,7 @@ class LivroDao {
     buscaPorId(id) {
 
         return new Promise((resolve, reject) => {
-            this._db.get(
+            this._connection.query(
                 `
                     SELECT *
                     FROM livros
@@ -75,6 +77,8 @@ class LivroDao {
                     if (erro) {
                         return reject('Não foi possível encontrar o livro!');
                     }
+                    livro = livro && livro[0];
+
                     return resolve(livro);
                 }
             );
@@ -83,7 +87,7 @@ class LivroDao {
 
     atualiza(livro) {
         return new Promise((resolve, reject) => {
-            this._db.run(`
+            this._connection.query(`
                 UPDATE livros SET
                 titulo = ?,
                 preco = ?,
@@ -105,5 +109,3 @@ class LivroDao {
         });
     }
 }
-
-module.exports = LivroDao;
