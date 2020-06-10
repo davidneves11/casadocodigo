@@ -28,5 +28,9 @@ module.exports = () => {
 
     routes(app)
 
+    app.use((req, resp, next) => resp.status(404).marko(require('../app/views/base/erros/404.marko')));
+
+    app.use((erro, req, resp, next) => resp.status(500).marko(require('../app/views/base/erros/500.marko')));
+
     return app;
 }

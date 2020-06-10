@@ -2,7 +2,7 @@
 "use strict";
 
 var marko_template = module.exports = require("marko/src/html").t(__filename),
-    marko_componentType = "/casadocodigo$1.0.0/src/app/views/livros/form/form.marko",
+    marko_componentType = "/casadocodigo$1.0.0/src/app/views/livros/form/formEditar.marko",
     marko_renderer = require("marko/src/runtime/components/renderer"),
     marko_attr = require("marko/src/runtime/html/helpers/attr"),
     helpers_escape_xml = require("marko/src/runtime/html/helpers/escape-xml"),
@@ -15,7 +15,7 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=col-4><h1 class=logo><img src=/estatico/imagens/logo-casadocodigo.svg alt=\"Casa do Código\"></h1></div><div class=\"cabecalhoPrincipal-navegacao col-8\"><a href=# class=login><i class=\"fas fa-sign-in-alt\"></i>Login</a></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Cadastro de livros</h1><form action=/livros method=post>");
+  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=col-4><h1 class=logo><img src=/estatico/imagens/logo-casadocodigo.svg alt=\"Casa do Código\"></h1></div><div class=\"cabecalhoPrincipal-navegacao col-8\"><a href=# class=login><i class=\"fas fa-sign-in-alt\"></i>Login</a></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Alteração de livros</h1><form action=/livros method=post>");
 
   if (data.livro.id) {
     out.w("<input type=hidden name=_method value=PUT><input type=hidden name=id" +
@@ -46,7 +46,7 @@ marko_template._ = marko_renderer(render, {
   });
 
 marko_template.meta = {
-    id: "/casadocodigo$1.0.0/src/app/views/livros/form/form.marko",
+    id: "/casadocodigo$1.0.0/src/app/views/livros/form/formEditar.marko",
     tags: [
       "marko/src/core-tags/components/init-components-tag",
       "marko/src/core-tags/core/await/reorderer-renderer",

@@ -37,10 +37,8 @@ module.exports = app => {
 
         livroDao.buscaPorId(id)
             .then(livro => {
-                console.log(livro);
-                if (!livro) resp.status(404).end();
                 resp.marko(
-                    require('../views/livros/form/form.marko'), { livro }
+                    require('../views/livros/form/formEditar.marko'), { livro }
                 )
             })
             .catch(erro => console.log(erro));
