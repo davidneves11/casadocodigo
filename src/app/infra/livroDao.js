@@ -78,9 +78,7 @@ module.exports = class LivroDao {
                         return reject('Não foi possível encontrar o livro!');
                     }
 
-                    livro = livro && livro[0];
-
-                    return resolve(livro);
+                    return resolve(livro[0]);
                 }
             );
         });

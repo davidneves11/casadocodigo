@@ -17,7 +17,6 @@ module.exports = () => {
     }));
 
     app.use(methodOverride((req, res) => {
-        console.log('oi');
         if (req.body && typeof req.body === 'object' && '_method' in req.body) {
             console.log('tchau');
             var method = req.body._method;

@@ -1,3 +1,4 @@
+const { check, validationResult } = require('express-validator');
 const LivroDao = require('../infra/LivroDao.js');
 const ConnectionFactory = require('../infra/ConnectionFactory.js');
 
@@ -44,16 +45,26 @@ module.exports = app => {
             .catch(erro => console.log(erro));
     });
 
-    app.post('/livros', (req, resp) => {
-        console.log(req.body);
+    app.post('/livros', [
+            check('titulo').isLength({ min: 5 }).withMessage("O título precisa ter no mínimo 5 caracteres!"),
+            check('preco').isCurrency().withMessage("O preço precisa ter um valor monetário válido!")
+        ],
+        (req, resp) => {
+            console.log(req.body);
 
-        const connection = new ConnectionFactory().getConnection();
-        const livroDao = new LivroDao(connection);
+            const connection = new ConnectionFactory().getConnection();
+            const livroDao = new LivroDao(connection);
 
-        livroDao.adiciona(req.body)
-            .then(resp.redirect('/livros'))
-            .catch(erro => console.log(erro));
-    });
+            const erros = validationResult(req);
+
+            if (!erros.isEmpty()) {
+                return resp.marko(require('../views/livros/form/form.marko'), { livro: {}, errosValidacao: erros.array() });
+            }
+
+            livroDao.adiciona(req.body)
+                .then(resp.redirect('/livros'))
+                .catch(erro => console.log(erro));
+        });
 
     app.put('/livros', (req, resp) => {
         console.log(req.body);
