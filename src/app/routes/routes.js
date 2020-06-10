@@ -58,7 +58,7 @@ module.exports = app => {
             const erros = validationResult(req);
 
             if (!erros.isEmpty()) {
-                return resp.marko(require('../views/livros/form/form.marko'), { livro: {}, errosValidacao: erros.array() });
+                return resp.marko(require('../views/livros/form/form.marko'), { livro: req.body, errosValidacao: erros.array() });
             }
 
             livroDao.adiciona(req.body)
