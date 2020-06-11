@@ -1,4 +1,4 @@
-const customExpress = require('./src/config/customExpress');
+const customExpress = require('./src/config/customExpress.js');
 
 const app = customExpress();
 

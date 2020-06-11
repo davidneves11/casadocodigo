@@ -16,7 +16,7 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=col-4><h1 class=logo><img src=/estatico/imagens/logo-casadocodigo.svg alt=\"Casa do Código\"></h1></div><div class=\"cabecalhoPrincipal-navegacao col-8\"><a href=# class=login><i class=\"fas fa-sign-in-alt\"></i>Login</a></div></div></div></header><main class=conteudoPrincipal><div class=container><h1> Listagem de livros </h1><table id=livros class=\"table table-striped table-hover\"><thead class=thead-dark><tr><th>ID</th><th>Título</th><th>Preço</th><th>Editar</th><th>Remover</th></tr></thead><tbody>");
+  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=col-4><h1 class=logo><img src=/estatico/imagens/logo-casadocodigo.svg alt=\"Casa do Código\"></h1></div><nav class=col-8><ul class=cabecalho><li class=cabecalhoPrincipal-navegacao><a href=/  class=login><i class=fas></i>home</a></li><li class=cabecalhoPrincipal-navegacao><a href=/livros/form class=login><i class=fas></i>Cadastrar</a></li><li class=cabecalhoPrincipal-navegacao><a href=/livros class=login><i class=fas></i>lista</a></li><li class=cabecalhoPrincipal-navegacao><a href=# class=login><i class=\"fas fa-sign-in-alt\"></i>Login</a></li></ul></nav></div></div></header><main class=conteudoPrincipal><div class=container><h1 class=title> Listagem de livros </h1><table id=livros class=\"table table-striped table-hover\"><thead class=thead-dark><tr><th>ID</th><th>Título</th><th>Preço</th><th>Editar</th><th>Remover</th></tr></thead><tbody>");
 
   var $for$0 = 0;
 
@@ -29,7 +29,7 @@ function render(input, out, __component, component, state) {
       marko_escapeXml(livro.id) +
       "</td><td>" +
       marko_escapeXml(livro.titulo) +
-      "</td><td>" +
+      "</td><td>R$ " +
       marko_escapeXml(livro.preco) +
       "</td><td><a" +
       marko_attr("href", "/livros/form/" + livro.id) +
@@ -42,7 +42,7 @@ function render(input, out, __component, component, state) {
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "47");
+  await_reorderer_tag({}, out, __component, "58");
 
   _preferred_script_location_tag({}, out);
 

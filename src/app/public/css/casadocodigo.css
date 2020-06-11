@@ -11,12 +11,16 @@
 }
 
 .cabecalhoPrincipal-navegacao .login {
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 38px;
     font-size: 20px;
     padding: 5px;
     color: #FFFFFF;
     text-decoration: none;
+}
+
+.title {
+    margin-top: 10;
 }
 
 .cabecalhoPrincipal-navegacao .login i {
@@ -46,7 +50,6 @@
 .rodape .redesSociais li a {
     color: #6C6A69;
     font-weight: 500;
-
     display: inline-block;
     padding-left: 40px;
     background-repeat: no-repeat;
@@ -60,4 +63,17 @@
 
 .rodape .redesSociais .compartilhar-twitter {
     background-image: url('/estatico/imagens/twitter.png');
+}
+
+.cabecalho {
+    list-style: none;
+    text-align: right;
+}
+
+.cabecalho li {
+    display: inline-block;
+    padding-left: 40px;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    /* line-height: 2.7; */
 }

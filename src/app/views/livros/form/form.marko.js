@@ -4,9 +4,9 @@
 var marko_template = module.exports = require("marko/src/html").t(__filename),
     marko_componentType = "/casadocodigo$1.0.0/src/app/views/livros/form/form.marko",
     marko_renderer = require("marko/src/runtime/components/renderer"),
-    marko_forOf = require("marko/src/runtime/helpers/for-of"),
     helpers_escape_xml = require("marko/src/runtime/html/helpers/escape-xml"),
     marko_escapeXml = helpers_escape_xml.x,
+    marko_forOf = require("marko/src/runtime/helpers/for-of"),
     marko_attr = require("marko/src/runtime/html/helpers/attr"),
     marko_loadTag = require("marko/src/runtime/helpers/load-tag"),
     init_components_tag = marko_loadTag(require("marko/src/core-tags/components/init-components-tag")),
@@ -16,7 +16,9 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=col-4><h1 class=logo><img src=/estatico/imagens/logo-casadocodigo.svg alt=\"Casa do Código\"></h1></div><div class=\"cabecalhoPrincipal-navegacao col-8\"><a href=# class=login><i class=\"fas fa-sign-in-alt\"></i>Login</a></div></div></div></header><main class=conteudoPrincipal><div class=container><h1>Cadastro de livros</h1>");
+  out.w("<html><head><meta charset=utf-8><link rel=stylesheet href=/estatico/css/bootstrap.min.css><link rel=stylesheet href=/estatico/css/fontawesome.min.css><link rel=stylesheet href=/estatico/css/casadocodigo.css></head><body><header class=cabecalhoPrincipal><div class=container><div class=\"row align-items-center\"><div class=col-4><h1 class=logo><img src=/estatico/imagens/logo-casadocodigo.svg alt=\"Casa do Código\"></h1></div><nav class=col-8><ul class=cabecalho><li class=cabecalhoPrincipal-navegacao><a href=/  class=login><i class=fas></i>home</a></li><li class=cabecalhoPrincipal-navegacao><a href=/livros/form class=login><i class=fas></i>Cadastrar</a></li><li class=cabecalhoPrincipal-navegacao><a href=/livros class=login><i class=fas></i>lista</a></li><li class=cabecalhoPrincipal-navegacao><a href=# class=login><i class=\"fas fa-sign-in-alt\"></i>Login</a></li></ul></nav></div></div></header><main class=conteudoPrincipal><div class=container><h1>" +
+    marko_escapeXml(data.tituloDoForm) +
+    "</h1>");
 
   if (data.errosValidacao) {
     var $for$0 = 0;
@@ -30,9 +32,11 @@ function render(input, out, __component, component, state) {
         marko_escapeXml(erro.msg) +
         "</div>");
     });
+
+    out.w(" ");
   }
 
-  out.w("<form action=/livros method=post>");
+  out.w("<form action=/livros/form method=post>");
 
   if (data.livro.id) {
     out.w("<input type=hidden name=_method value=PUT><input type=hidden name=id" +
@@ -50,7 +54,7 @@ function render(input, out, __component, component, state) {
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "44");
+  await_reorderer_tag({}, out, __component, "55");
 
   _preferred_script_location_tag({}, out);
 
