@@ -6,7 +6,7 @@ module.exports = class LivroDao {
 
     lista() {
         return new Promise((resolve, reject) => {
-            this._connection.query('SELECT * FROM livros', function(erro, resultado) {
+            this._connection.query('SELECT * FROM livros', (erro, resultado) => {
                 if (erro) {
                     return reject({
                         mensagem: 'Não foi possível listar os livros!',

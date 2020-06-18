@@ -5,7 +5,18 @@ const Livro = require('../models/Livro.js');
 
 const rotasLivro = LivroController.rotas();
 
+const BaseController = require('../controllers/baseController');
+
 module.exports = app => {
+
+    app.use(rotasLivro.autenticadas, (req, resp, next) => {
+
+        if (req.isAuthenticated()) {
+            next();
+        } else {
+            resp.redirect(BaseController.rotas().login);
+        }
+    });
 
     app.get(rotasLivro.lista, livroController.lista());
 

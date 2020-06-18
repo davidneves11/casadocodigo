@@ -5,6 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const routes = require('../app/routes/routes.js');
+const sessaoAutenticacao = require('./sessaoAutenticacao');
 
 module.exports = () => {
 
@@ -24,11 +25,17 @@ module.exports = () => {
         }
     }));
 
+    sessaoAutenticacao(app);
+
     routes(app)
 
     app.use((req, resp, next) => resp.status(404).marko(require('../app/views/base/erros/404.marko')));
 
-    app.use((erro, req, resp, next) => resp.status(500).marko(require('../app/views/base/erros/500.marko')));
+    app.use((erro, req, resp, next) => {
+        console.log(erro);
+
+        resp.status(500).marko(require('../app/views/base/erros/500.marko'));
+    });
 
     return app;
 }
